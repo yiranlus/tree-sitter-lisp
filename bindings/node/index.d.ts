@@ -25,10 +25,10 @@ type NodeInfo =
  *
  * @example
  * import Parser from "tree-sitter";
- * import CommonLisp from "tree-sitter-commonlisp";
+ * import Lisp from "tree-sitter-lisp";
  *
  * const parser = new Parser();
- * parser.setLanguage(CommonLisp);
+ * parser.setLanguage(Lisp);
  */
 declare const binding: {
   /**

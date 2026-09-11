@@ -11,7 +11,7 @@ from wheel.bdist_wheel import bdist_wheel
 class Build(build):
     def run(self):
         if path.isdir("queries"):
-            dest = path.join(self.build_lib, "tree_sitter_commonlisp", "queries")
+            dest = path.join(self.build_lib, "tree_sitter_lisp", "queries")
             self.copy_tree("queries", dest)
         super().run()
 
@@ -49,15 +49,15 @@ setup(
     packages=find_packages("bindings/python"),
     package_dir={"": "bindings/python"},
     package_data={
-        "tree_sitter_commonlisp": ["*.pyi", "py.typed"],
-        "tree_sitter_commonlisp.queries": ["*.scm"],
+        "tree_sitter_lisp": ["*.pyi", "py.typed"],
+        "tree_sitter_lisp.queries": ["*.scm"],
     },
-    ext_package="tree_sitter_commonlisp",
+    ext_package="tree_sitter_lisp",
     ext_modules=[
         Extension(
             name="_binding",
             sources=[
-                "bindings/python/tree_sitter_commonlisp/binding.c",
+                "bindings/python/tree_sitter_lisp/binding.c",
                 "src/parser.c",
             ],
             define_macros=[

@@ -1,12 +1,12 @@
 from unittest import TestCase
 
 from tree_sitter import Language, Parser
-import tree_sitter_commonlisp
+import tree_sitter_lisp
 
 
 class TestLanguage(TestCase):
     def test_can_load_grammar(self):
         try:
-            Parser(Language(tree_sitter_commonlisp.language()))
+            Parser(Language(tree_sitter_lisp.language()))
         except Exception:
-            self.fail("Error loading Common Lisp grammar")
+            self.fail("Error loading Lisp grammar")

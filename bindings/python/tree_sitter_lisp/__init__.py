@@ -1,4 +1,4 @@
-"""Commonlisp grammar for tree-sitter"""
+"""A universal Lisp Treesitter"""
 
 from ._binding import language
 

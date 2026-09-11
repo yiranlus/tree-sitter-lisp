@@ -10,17 +10,17 @@ classifiers = [
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed",
 ]
-description = "Commonlisp grammar for tree-sitter"
-keywords = [ "incremental", "parsing", "tree-sitter", "commonlisp" ]
+description = "A universal Lisp Treesitter"
+keywords = [ "incremental", "parsing", "tree-sitter", "lisp" ]
 license.text = "MIT"
-name = "tree-sitter-commonlisp"
+name = "tree-sitter-lisp"
 readme = "README.md"
 requires-python = ">=3.10"
 version = "0.1.0"
 
 [project.urls]
 Funding = ""
-Homepage = "https://github.com/tree-sitter/tree-sitter-commonlisp"
+Homepage = "https://github.com/yiranlus/tree-sitter-lisp"
 
 [project.optional-dependencies]
 core = [ "tree-sitter~=0.24" ]

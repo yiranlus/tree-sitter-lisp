@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-commonlisp
+module github.com/yiranlus/tree-sitter-lisp
 
 go 1.22
 

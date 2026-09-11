@@ -1,15 +1,15 @@
-package tree_sitter_commonlisp_test
+package tree_sitter_lisp_test
 
 import (
 	"testing"
 
 	tree_sitter "github.com/tree-sitter/go-tree-sitter"
-	tree_sitter_commonlisp "github.com/tree-sitter/tree-sitter-commonlisp/bindings/go"
+	tree_sitter_lisp "github.com/yiranlus/tree-sitter-lisp/bindings/go"
 )
 
 func TestCanLoadGrammar(t *testing.T) {
-	language := tree_sitter.NewLanguage(tree_sitter_commonlisp.Language())
+	language := tree_sitter.NewLanguage(tree_sitter_lisp.Language())
 	if language == nil {
-		t.Errorf("Error loading Common Lisp grammar")
+		t.Errorf("Error loading Lisp grammar")
 	}
 }

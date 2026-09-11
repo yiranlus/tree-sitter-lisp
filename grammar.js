@@ -1,5 +1,5 @@
 /**
- * @file Commonlisp grammar for tree-sitter
+ * @file A universal Lisp Treesitter
  * @author Yiran Lu <me@yiranls.cc>
  * @license MIT
  */
@@ -8,7 +8,7 @@
 // @ts-check
 
 export default grammar({
-  name: "commonlisp",
+  name: "lisp",
 
   rules: {
     // TODO: add the actual grammar rules
