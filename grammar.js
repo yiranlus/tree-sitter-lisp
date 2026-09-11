@@ -7,11 +7,96 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const PREC = {
+  first: ($) => prec(100, $),
+  last: ($) => prec(-100, $),
+};
+
+const common = {
+  whitespace: /[ \r\n\t\f\v\p{Zs}\p{Zl}\p{Zp}]/,
+  intra_whitespace: /[\t\p{Zs}]/,
+  line_ending: /[\n\r\u{2028}\u{0085}]|(\r\n)|(\r\u{0085})/,
+  any_char: /.|[\r\n\u{85}\u{2028}\u{2029}]/,
+
+  symbol_char: /[^ \r\n\t\f\v\p{Zs}\p{Zl}\p{Zp}#;"'`,\(\)]/,
+};
+
 export default grammar({
   name: "lisp",
 
   rules: {
-    // TODO: add the actual grammar rules
-    source_file: $ => "hello"
-  }
+    program: $ => repeat($._expression),
+
+    _expression: $ => choice($._intertoken, $._s_expr),
+
+    // intertoken is a token that can appear between datums, such as whitespace and comments.
+    _intertoken: $ => choice(
+      token(repeat1(common.whitespace)),
+      $.comment,
+      $.block_comment
+    ),
+
+    comment: _ => /;.*/,
+
+    block_comment: $ => seq(
+      "#|",
+      repeat(
+        choice(
+          PREC.first($.block_comment),
+          common.any_char)),
+      PREC.first("|#")
+    ),
+
+    // a datum is basically S-expr
+    _s_expr: $ => choice(
+      $.string,
+      $.token,
+      $.list,
+      $.reader_macro,
+      $.quote,
+      $.quasiquote,
+      $.unquote,
+      $.unquote_splicing,
+    ),
+
+    string: _ => token(
+      seq(
+        '"',
+        repeat(
+          choice(
+            seq('\\', /./),
+            /[^"\\]+/
+          )
+        ),
+        '"'
+      )
+    ),
+
+    // a symbol here includes keywords, identifiers, and operands
+    _pure_token: $ => token(
+      choice(
+        repeat1(common.symbol_char),
+        seq("|", repeat1(common.any_char), "|"),
+      )
+    ),
+    _keyword: $ => seq( "#:", $._pure_token),
+    _function: $ => seq( "#'", $._pure_token),
+    token: $ => choice($._keyword, $._pure_token, $._function),
+
+    list: $ => seq("(", repeat($._expression), ")"),
+
+    reader_macro: $ => seq(
+      "#",
+      choice(
+        $.list, // vector
+        PREC.first(seq($._pure_token, choice($.string, $.list))),
+        PREC.last($._pure_token)
+      )
+    ),
+
+    quote: $ => seq("'", repeat($._intertoken), $._s_expr),
+    quasiquote: $ => seq("`", repeat($._intertoken), $._s_expr),
+    unquote: $ => seq(",", repeat($._intertoken), $._s_expr),
+    unquote_splicing: $ => seq(",@", repeat($._intertoken), $._s_expr),
+  },
 });
