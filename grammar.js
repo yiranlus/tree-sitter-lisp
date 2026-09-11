@@ -49,7 +49,6 @@ export default grammar({
 
     // a datum is basically S-expr
     _s_expr: $ => choice(
-      $.string,
       $.token,
       $.list,
       $.reader_macro,
@@ -59,7 +58,7 @@ export default grammar({
       $.unquote_splicing,
     ),
 
-    string: _ => token(
+    _string: _ => token(
       seq(
         '"',
         repeat(
@@ -81,7 +80,7 @@ export default grammar({
     ),
     _keyword: $ => seq( "#:", $._pure_token),
     _function: $ => seq( "#'", $._pure_token),
-    token: $ => choice($._keyword, $._pure_token, $._function),
+    token: $ => choice($._keyword, $._pure_token, $._function, $._string),
 
     list: $ => seq("(", repeat($._expression), ")"),
 
@@ -89,7 +88,7 @@ export default grammar({
       "#",
       choice(
         $.list, // vector
-        PREC.first(seq($._pure_token, choice($.string, $.list))),
+        PREC.first(seq($._pure_token, choice($._string, $.list))),
         PREC.last($._pure_token)
       )
     ),
