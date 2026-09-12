@@ -32,11 +32,11 @@ export default grammar({
     // intertoken is a token that can appear between datums, such as whitespace and comments.
     _intertoken: $ => choice(
       token(repeat1(common.whitespace)),
-      $.comment,
+      $.line_comment,
       $.block_comment
     ),
 
-    comment: _ => /;.*/,
+    line_comment: _ => /;.*/,
 
     block_comment: $ => seq(
       "#|",
