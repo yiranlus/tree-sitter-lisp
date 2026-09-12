@@ -64,6 +64,7 @@ export default grammar({
         repeat(
           choice(
             seq('\\', /./),
+            '\\\n',
             /[^"\\]+/
           )
         ),
@@ -87,6 +88,7 @@ export default grammar({
     reader_macro: $ => seq(
       "#",
       choice(
+        seq("\\", /[#;"'`,\(\)]/),
         $.list, // vector
         PREC.first(seq($._pure_token, choice($._string, $.list))),
         PREC.last($._pure_token)
