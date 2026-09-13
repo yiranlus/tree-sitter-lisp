@@ -52,10 +52,10 @@ export default grammar({
       $.token,
       $.list,
       $.reader_macro,
-      $.quote,
-      $.quasiquote,
-      $.unquote,
-      $.unquote_splicing,
+      $._quote,
+      $._quasiquote,
+      $._unquote,
+      $._unquote_splicing,
     ),
 
     _string: _ => token(
@@ -95,9 +95,9 @@ export default grammar({
       )
     ),
 
-    quote: $ => seq("'", repeat($._intertoken), $._s_expr),
-    quasiquote: $ => seq("`", repeat($._intertoken), $._s_expr),
-    unquote: $ => seq(",", repeat($._intertoken), $._s_expr),
-    unquote_splicing: $ => seq(",@", repeat($._intertoken), $._s_expr),
+    _quote: $ => seq("'", repeat($._intertoken), $._s_expr),
+    _quasiquote: $ => seq("`", repeat($._intertoken), $._s_expr),
+    _unquote: $ => seq(",", repeat($._intertoken), $._s_expr),
+    _unquote_splicing: $ => seq(",@", repeat($._intertoken), $._s_expr),
   },
 });
