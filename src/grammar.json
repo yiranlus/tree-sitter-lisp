@@ -182,7 +182,7 @@
             "type": "REPEAT1",
             "content": {
               "type": "PATTERN",
-              "value": "[^ \\r\\n\\t\\f\\v\\p{Zs}\\p{Zl}\\p{Zp}#;\"'`,\\(\\)]"
+              "value": "[^ \\r\\n\\t\\f\\v\\p{Zs}\\p{Zl}\\p{Zp}#;\"'`,\\(\\)|]"
             }
           },
           {
@@ -190,18 +190,27 @@
             "members": [
               {
                 "type": "STRING",
-                "value": "[^#]|"
+                "value": "|"
               },
               {
-                "type": "REPEAT1",
+                "type": "REPEAT",
                 "content": {
-                  "type": "PATTERN",
-                  "value": ".|[\\r\\n\\u{85}\\u{2028}\\u{2029}]"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "\\\n"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[^|]+"
+                    }
+                  ]
                 }
               },
               {
                 "type": "STRING",
-                "value": "|[^#]"
+                "value": "|"
               }
             ]
           }

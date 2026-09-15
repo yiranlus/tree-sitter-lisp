@@ -18,7 +18,7 @@ const common = {
   line_ending: /[\n\r\u{2028}\u{0085}]|(\r\n)|(\r\u{0085})/,
   any_char: /.|[\r\n\u{85}\u{2028}\u{2029}]/,
 
-  symbol_char: /[^ \r\n\t\f\v\p{Zs}\p{Zl}\p{Zp}#;"'`,\(\)]/,
+  symbol_char: /[^ \r\n\t\f\v\p{Zs}\p{Zl}\p{Zp}#;"'`,\(\)|]/,
 };
 
 export default grammar({
@@ -77,7 +77,14 @@ export default grammar({
     _pure_token: $ => token(
       choice(
         repeat1(common.symbol_char),
-        seq("[^#]|", repeat1(common.any_char), "|[^#]"),
+        seq("|",
+          repeat(
+            choice(
+              '\\\n',
+              /[^|]+/
+            )
+          ),
+          "|"),
       )
     ),
     _keyword: $ => seq( "#:", $._pure_token),
