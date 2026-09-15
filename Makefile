@@ -1,10 +1,11 @@
-LANGUAGE_NAME := tree-sitter-lisp
+LANG = lisp
+LANGUAGE_NAME := tree-sitter-$(LANG)
 HOMEPAGE_URL := https://github.com/yiranlus/tree-sitter-lisp
 VERSION := 0.1.0
 DESCRIPTION := A universal Lisp Treesitter
 
 # repository
-SRC_DIR := src
+SRC_DIR := src-scheme
 
 TS ?= tree-sitter
 
