@@ -53,10 +53,10 @@ export default grammar({
       $.token,
       $.list,
       $.reader_macro,
-      $._quote,
-      $._quasiquote,
-      $._unquote,
-      $._unquote_splicing,
+      $.quote,
+      $.quasiquote,
+      $.unquote,
+      $.unquote_splicing,
     ),
 
     _string: _ => token(
@@ -81,8 +81,7 @@ export default grammar({
       )
     ),
     _keyword: $ => seq( "#:", $._pure_token),
-    _function: $ => seq( "#'", $._pure_token),
-    token: $ => choice($._keyword, $._pure_token, $._function, $._string),
+    token: $ => choice($._keyword, $._pure_token, $._string),
 
     list: $ => seq("(", repeat($._expression), ")"),
 
@@ -91,14 +90,15 @@ export default grammar({
       choice(
         seq("\\", /[#;"'`,\(\)]/),
         $.list, // vector
+        seq("'", repeat($._intertoken), choice($._pure_token, $.list)), // quote
         PREC.first(seq($._pure_token, choice($._string, $.list))),
         PREC.last($._pure_token)
       )
     ),
 
-    _quote: $ => seq("'", repeat($._intertoken), $._s_expr),
-    _quasiquote: $ => seq("`", repeat($._intertoken), $._s_expr),
-    _unquote: $ => seq(",", repeat($._intertoken), $._s_expr),
-    _unquote_splicing: $ => seq(",@", repeat($._intertoken), $._s_expr),
+    quote: $ => seq("'", repeat($._intertoken), $._s_expr),
+    quasiquote: $ => seq("`", repeat($._intertoken), $._s_expr),
+    unquote: $ => seq(",", repeat($._intertoken), $._s_expr),
+    unquote_splicing: $ => seq(",@", repeat($._intertoken), $._s_expr),
   },
 });
