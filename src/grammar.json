@@ -217,26 +217,9 @@
         ]
       }
     },
-    "_keyword": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "#:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_pure_token"
-        }
-      ]
-    },
     "token": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_keyword"
-        },
         {
           "type": "SYMBOL",
           "name": "_pure_token"

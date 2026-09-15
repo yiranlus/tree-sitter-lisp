@@ -73,7 +73,7 @@ export default grammar({
       )
     ),
 
-    // a symbol here includes keywords, identifiers, and operands
+    // a symbol here includes identifiers, and operands
     _pure_token: $ => token(
       choice(
         repeat1(common.symbol_char),
@@ -87,8 +87,7 @@ export default grammar({
           "|"),
       )
     ),
-    _keyword: $ => seq( "#:", $._pure_token),
-    token: $ => choice($._keyword, $._pure_token, $._string),
+    token: $ => choice($._pure_token, $._string),
 
     list: $ => seq("(", repeat($._expression), ")"),
 
