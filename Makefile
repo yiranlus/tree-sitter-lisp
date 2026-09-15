@@ -5,7 +5,7 @@ VERSION := 0.1.0
 DESCRIPTION := A universal Lisp Treesitter
 
 # repository
-SRC_DIR := src-scheme
+SRC_DIR := src-$(LANG)
 
 TS ?= tree-sitter
 

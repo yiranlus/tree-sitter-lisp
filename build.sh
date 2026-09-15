@@ -25,7 +25,7 @@ for lang in "$@"; do
     cp "src/parser.c" "src-$lang/parser.c"
     ln -s "../src/tree_sitter/" "src-$lang/tree_sitter"
 
-    sed -i "s/\\b(lisp)\\b/$lang/g" "src-$lang/grammar.json" "src-$lang/parser.c"
+    sed -i "s/lisp/$lang/g" "src-$lang/grammar.json" "src-$lang/parser.c"
   fi
 
   make LANG="$lang"
