@@ -7,7 +7,9 @@
       "title": "Lisp",
       "scope": "source.lisp",
       "file-types": [
-        "lisp,commonlisp,scheme"
+        "lisp",
+        "commonlisp",
+        "scheme"
       ],
       "injection-regex": "^lisp$",
       "class-name": "TreeSitterLisp"
