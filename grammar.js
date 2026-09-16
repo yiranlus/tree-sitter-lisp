@@ -97,6 +97,7 @@ export default grammar({
         seq("\\", /[#;"'`,\(\)]/),
         $.list, // vector
         seq("'", repeat($._intertoken), choice($._pure_token, $.list)), // quote
+        seq(";", repeat($._intertoken), choice($._pure_token, $.list)), // Scheme datum comment
         PREC.first(seq($._pure_token, choice($._string, $.list))),
         PREC.last($._pure_token)
       )

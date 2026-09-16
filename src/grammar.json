@@ -307,6 +307,35 @@
               ]
             },
             {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ";"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_intertoken"
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_pure_token"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "list"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "type": "PREC",
               "value": 100,
               "content": {
