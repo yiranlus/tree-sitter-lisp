@@ -182,7 +182,7 @@
             "type": "REPEAT1",
             "content": {
               "type": "PATTERN",
-              "value": "[^ \\r\\n\\t\\f\\v\\p{Zs}\\p{Zl}\\p{Zp}#;\"'`,\\(\\)|]"
+              "value": "[^ \\r\\n\\t\\f\\v\\p{Zs}\\p{Zl}\\p{Zp}#;\"'`,\\(\\)\\[\\]\\{\\}|]"
             }
           },
           {
@@ -231,22 +231,67 @@
       ]
     },
     "list": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "("
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "["
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "]"
+            }
+          ]
         },
         {
-          "type": "STRING",
-          "value": ")"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "{"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "}"
+            }
+          ]
         }
       ]
     },
@@ -269,7 +314,7 @@
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[#;\"'`,\\(\\)]"
+                  "value": "[#;\"'`,\\(\\)\\[\\]\\{\\}]"
                 }
               ]
             },

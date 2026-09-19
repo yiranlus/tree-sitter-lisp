@@ -18,7 +18,7 @@ const common = {
   line_ending: /[\n\r\u{2028}\u{0085}]|(\r\n)|(\r\u{0085})/,
   any_char: /.|[\r\n\u{85}\u{2028}\u{2029}]/,
 
-  symbol_char: /[^ \r\n\t\f\v\p{Zs}\p{Zl}\p{Zp}#;"'`,\(\)|]/,
+  symbol_char: /[^ \r\n\t\f\v\p{Zs}\p{Zl}\p{Zp}#;"'`,\(\)\[\]\{\}|]/,
 };
 
 export default grammar({
@@ -89,12 +89,16 @@ export default grammar({
     ),
     token: $ => choice($._pure_token, $._string),
 
-    list: $ => seq("(", repeat($._expression), ")"),
+    list: $ => choice(
+      seq("(", repeat($._expression), ")"),
+      seq("[", repeat($._expression), "]"),
+      seq("{", repeat($._expression), "}"),
+    ),
 
     reader_macro: $ => seq(
       "#",
       choice(
-        seq("\\", /[#;"'`,\(\)]/),
+        seq("\\", /[#;"'`,\(\)\[\]\{\}]/),
         $.list, // vector
         seq("'", repeat($._intertoken), choice($._pure_token, $.list)), // quote
         seq(";", repeat($._intertoken), choice($._pure_token, $.list)), // Scheme datum comment
