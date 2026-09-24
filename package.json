@@ -14,8 +14,8 @@
     "email": "me@yiranls.cc",
     "url": "https://yiranls.cc/"
   },
-  "main": "bindings/node",
-  "types": "bindings/node",
+  "main": "bindings/node/index.js",
+  "types": "bindings/node/index.d.ts",
   "keywords": [
     "incremental",
     "parsing",
