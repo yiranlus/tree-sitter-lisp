@@ -58,3 +58,10 @@ If you want to use this tree-sitter for Neovim, you can load the plugin using th
 ```
 
 This will build parsers for `lisp`, `scheme`, and `commonlisp`. All of these parsers use the same grammar. If you only want to install it for general Lisp, you can safely remove these options.
+
+## Related Projects
+
+This project is aimed to be a very general Lisp parser and I often referred to other existing Lisp parsers:
+
+* [6cdh/tree-sitter-scheme](https://github.com/6cdh/tree-sitter-scheme)
+* [tree-sitter-grammars/tree-sitter-commonlisp](https://github.com/tree-sitter-grammars/tree-sitter-commonlisp)
