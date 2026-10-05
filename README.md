@@ -2,6 +2,8 @@
 
 This tree-sitter is a very general Lisp parser. It has been tested on Common Lisp and Guile codes.
 
+This tree-sitter aims to use the minimal effort to represent a Lisp code rather than trying to encompass the language features.
+
 ## Concept
 
 This tree-sitter does not aim to map the Lisp code to a syntaxique structure. Instead, it tries to keep parsed structure as simple as possible. In a parsing, only the following node types will be produced:
