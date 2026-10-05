@@ -59,6 +59,8 @@ If you want to use this tree-sitter for Neovim, you can load the plugin using th
 
 This will build parsers for `lisp`, `scheme`, and `commonlisp`. All of these parsers use the same grammar. If you only want to install it for general Lisp, you can safely remove these options.
 
+**Note:** if you use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), you should either remove the related tree-sitters, e.g., `commonlisp` or `scheme`, or choose another name for `LANG` to recompile. Otherwise, Nvim might not use this tree-sitter.
+
 ## Related Projects
 
 This project is aimed to be a very general Lisp parser and I often referred to other existing Lisp parsers:
